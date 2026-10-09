@@ -2,6 +2,7 @@ from src.nodes.signal_node import signal_node
 from src.schemas.analysis import AnalysisBundle, AnalystOpinion
 from src.schemas.market import MarketSnapshot
 from src.schemas.portfolio import PortfolioSnapshot
+from datetime import datetime, timezone
 
 
 def test_signal_node_holds_for_low_confidence() -> None:
@@ -10,7 +11,7 @@ def test_signal_node_holds_for_low_confidence() -> None:
         "market": MarketSnapshot(
             symbol="RELIANCE.NS",
             last_price=1000,
-            fetched_at="2026-01-01T00:00:00Z",
+            fetched_at=datetime(2026, 1, 1, tzinfo=timezone.utc),
         ),
         "portfolio": PortfolioSnapshot(
             total_value=100_000,
