@@ -1,0 +1,142 @@
+Trading-Platform-Using-Agentic-AI-System/
+│
+├── src/
+│   ├── __init__.py
+│   │
+│   ├── config/
+│   │   ├── __init__.py
+│   │   └── settings.py
+│   │
+│   ├── graphs/
+│   │   ├── __init__.py
+│   │   ├── graph_builder.py
+│   │   └── trading_graph.py
+│   │
+│   ├── llms/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── gateway.py
+│   │   ├── openai_llm.py
+│   │   ├── gemini_llm.py
+│   │   ├── groq_llm.py
+│   │   ├── sarvam_llm.py
+│   │   └── factory.py
+│   │
+│   ├── states/
+│   │   ├── __init__.py
+│   │   └── state.py
+│   │
+│   ├── nodes/
+│   │   ├── __init__.py
+│   │   ├── blog_node.py
+│   │   ├── market_data_node.py
+│   │   ├── technical_analysis_node.py
+│   │   ├── fundamental_analysis_node.py
+│   │   ├── sentiment_analysis_node.py
+│   │   ├── portfolio_node.py
+│   │   ├── debate_node.py
+│   │   ├── signal_node.py
+│   │   ├── risk_node.py
+│   │   ├── approval_node.py
+│   │   ├── execution_node.py
+│   │   └── audit_node.py
+│   │
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   ├── market.py
+│   │   ├── analysis.py
+│   │   ├── signals.py
+│   │   ├── orders.py
+│   │   └── portfolio.py
+│   │
+│   ├── tools/
+│   │   ├── __init__.py
+│   │   ├── market_tools.py
+│   │   ├── technical_tools.py
+│   │   ├── fundamental_tools.py
+│   │   ├── news_tools.py
+│   │   ├── portfolio_tools.py
+│   │   └── broker_tools.py
+│   │
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── market_data.py
+│   │   ├── news_data.py
+│   │   └── cache.py
+│   │
+│   ├── brokers/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   ├── paper_broker.py
+│   │   ├── zerodha_broker.py
+│   │   ├── upstox_broker.py
+│   │   └── factory.py
+│   │
+│   ├── risk/
+│   │   ├── __init__.py
+│   │   ├── limits.py
+│   │   ├── position_sizing.py
+│   │   └── validators.py
+│   │
+│   ├── persistence/
+│   │   ├── __init__.py
+│   │   ├── database.py
+│   │   ├── models.py
+│   │   └── repositories.py
+│   │
+│   ├── prompts/
+│   │   ├── __init__.py
+│   │   ├── technical.py
+│   │   ├── fundamental.py
+│   │   ├── sentiment.py
+│   │   ├── debate.py
+│   │   └── signal.py
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       ├── logging.py
+│       ├── retry.py
+│       └── time.py
+│
+├── api/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── dependencies.py
+│   └── routes/
+│       ├── health.py
+│       ├── analysis.py
+│       ├── trading.py
+│       └── approvals.py
+│
+├── tests/
+│   ├── unit/
+│   │   ├── test_risk.py
+│   │   ├── test_position_sizing.py
+│   │   ├── test_paper_broker.py
+│   │   └── test_nodes.py
+│   ├── integration/
+│   │   └── test_trading_graph.py
+│   └── conftest.py
+│
+├── scripts/
+│   ├── run_analysis.py
+│   ├── run_paper_trade.py
+│   └── seed_database.py
+│
+├── migrations/
+│
+├── gateway/
+│   ├── config.yaml
+│   ├── Dockerfile
+│   └── README.md
+│
+├── docker/
+│   ├── Dockerfile.api
+│   └── Dockerfile.worker
+│
+├── .env.example
+├── .gitignore
+├── docker-compose.yml
+├── pyproject.toml
+├── Makefile
+└── README.md

@@ -1,0 +1,30 @@
+FROM python:3.11-slim AS builder
+
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+ENV UV_NO_CACHE=1
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+WORKDIR /app
+
+COPY pyproject.toml uv.lock README.md ./
+
+RUN uv sync --frozen --no-dev --no-install-project
+
+COPY src ./src
+COPY scripts ./scripts
+
+RUN uv sync --frozen --no-dev
+
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONUNBUFFERED=1
+
+COPY --from=builder /app /app
+
+CMD ["python", "scripts/run_paper_trade.py"]

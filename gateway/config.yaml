@@ -1,0 +1,34 @@
+model_list:
+  - model_name: analysis-model
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  - model_name: reasoning-model
+    litellm_params:
+      model: openai/gpt-4o-mini
+      api_key: os.environ/OPENAI_API_KEY
+
+  - model_name: fallback-model
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: sarvam-model
+    litellm_params:
+      model: sarvam/sarvam-m
+      api_key: os.environ/SARVAM_API_KEY
+
+general_settings:
+  master_key: os.environ/LLM_GATEWAY_API_KEY
+
+litellm_settings:
+  num_retries: 2
+  request_timeout: 120
+  drop_params: true
+  set_verbose: false
+  fallbacks:
+    - analysis-model:
+        - fallback-model
+    - reasoning-model:
+        - fallback-model

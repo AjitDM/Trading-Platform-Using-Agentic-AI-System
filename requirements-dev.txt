@@ -1,0 +1,32 @@
+# ============================================================
+# Agentic Equity Trading System - Development Dependencies
+# Use for local development, testing, CI/CD, linting, and typing.
+#
+# Import runtime dependencies first:
+#   uv add -r requirements.txt
+#
+# Then add these to the uv dev dependency group:
+#   uv add --dev -r requirements-dev.txt
+# ============================================================
+
+# Include all runtime/application packages
+-r requirements.txt
+
+# ------------------------------------------------------------
+# Testing
+# ------------------------------------------------------------
+pytest>=8.3.0
+pytest-asyncio>=0.24.0
+pytest-cov>=6.0.0
+
+# ------------------------------------------------------------
+# Code quality
+# ------------------------------------------------------------
+ruff>=0.8.0
+mypy>=1.13.0
+pre-commit>=4.0.0
+
+# ------------------------------------------------------------
+# Helpful local developer tools
+# ------------------------------------------------------------
+ipykernel>=6.29.0

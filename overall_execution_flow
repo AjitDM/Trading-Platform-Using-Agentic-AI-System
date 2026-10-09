@@ -1,0 +1,104 @@
+API / CLI Request
+      │
+      │ symbol = "RELIANCE.NS"
+      ▼
+start_trading_run()
+      │
+      ▼
+LangGraph TradingState created
+      │
+      ▼
+1. market_data_node
+      │  Fetch OHLCV, calculate indicators, fetch news
+      ▼
+2. portfolio_node
+      │  Fetch cash, positions, P&L from paper/live broker
+      ▼
+3. technical_analysis_node
+      │  LLM analyzes deterministic price + indicator data
+      ▼
+4. fundamental_analysis_node
+      │  LLM analyzes licensed fundamentals when added
+      ▼
+5. sentiment_analysis_node
+      │  LLM analyzes supplied news records
+      ▼
+6. debate_node
+      │  LLM synthesizes analyst opinions into consensus
+      ▼
+7. signal_node
+      │  Python creates BUY / SELL / HOLD candidate
+      │  Python calculates quantity and basic stops/targets
+      ▼
+8. risk_node
+      │  Deterministic rules validate capital, position, loss limits
+      │
+      ├── Risk fails ──────────────────────────► audit_node ► END
+      │
+      └── Risk passes
+               │
+               ▼
+9. approval_node
+      │  LangGraph interrupt() pauses graph if approval is required
+      │
+      ├── Rejected ────────────────────────────► audit_node ► END
+      │
+      └── Approved
+               │
+               ▼
+10. execution_node
+      │  Uses PaperBroker / ZerodhaBroker / future UpstoxBroker
+      ▼
+11. audit_node
+      │  Saves signal, order, execution outcome, and errors
+      ▼
+     END
+
+
+A. Analysis-only or HOLD workflow
+text
+POST /analysis/
+        │
+        ▼
+Graph creates analyst opinions
+        │
+        ▼
+Signal = HOLD
+        │
+        ▼
+Audit record saved
+        │
+        ▼
+Return result to API caller
+No broker order is created.
+
+B. Proposed paper/live trade workflow
+text
+POST /trading/run
+        │
+        ▼
+Graph creates BUY or SELL signal
+        │
+        ▼
+Risk validation passes
+        │
+        ▼
+approval_node calls interrupt()
+        │
+        ▼
+API returns paused graph state / interrupt payload
+        │
+        ▼
+POST /approvals/{run_id}
+        │
+        ▼
+resume_trading_run()
+        │
+        ▼
+Command(resume={"approved": true})
+        │
+        ▼
+execution_node places order
+        │
+        ▼
+audit_node stores final outcome
